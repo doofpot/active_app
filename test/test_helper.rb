@@ -1,4 +1,4 @@
-require 'active_flag'
+require 'active_app'
 
 require 'minitest/autorun'
 require 'minitest/pride'

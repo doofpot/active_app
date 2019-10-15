@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ActiveFlagTest < Minitest::Test
+class ActiveAppTest < Minitest::Test
   def setup
     @profile = Profile.first
   end

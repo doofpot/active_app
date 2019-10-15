@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require 'active_flag'
+require 'active_app'
 
 require_relative '../test/load_fixtures'
 

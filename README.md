@@ -1,6 +1,10 @@
-# ActiveFlag - Bit array for ActiveRecord
+# ActiveApp - Bit array for ActiveRecord
 
-[![Build Status](https://travis-ci.org/kenn/active_flag.svg)](https://travis-ci.org/kenn/active_flag)
+
+Deze code is overgenomen van  active_flag.
+
+
+[![Build Status](https://travis-ci.org/kenn/active_app.svg)](https://travis-ci.org/kenn/active_app)
 
 Store up to 64 multiple flags ([bit array](https://en.wikipedia.org/wiki/Bit_array)) in a single integer column with ActiveRecord. From a UI standpoint, it can be used as a  multi-select checkbox storage.
 
@@ -23,7 +27,7 @@ end
 # {:english=>1, :spanish=>2, :chinese=>4, :french=>8, :japanese=>16 }
 
 # Instance methods
-profile.languages                           #=> #<ActiveFlag::Value: {:english, :japanese}>
+profile.languages                           #=> #<ActiveApp::Value: {:english, :japanese}>
 profile.languages.english?                  #=> true
 profile.languages.set?(:english)            #=> true
 profile.languages.unset?(:english)          #=> false
@@ -49,7 +53,7 @@ Profile.languages.unset_all!(:chinese)      #=> UPDATE "profiles" SET languages 
 ## Install
 
 ```ruby
-gem 'active_flag'
+gem 'active_app'
 ```
 
 ### Migration
@@ -88,13 +92,13 @@ Profile.where_languages(:french, :spanish, op: :and) #=> SELECT * FROM profiles 
 
 ## Translation
 
-`ActiveFlag` supports [i18n](http://guides.rubyonrails.org/i18n.html) just as ActiveModel does.
+`ActiveApp` supports [i18n](http://guides.rubyonrails.org/i18n.html) just as ActiveModel does.
 
 For instance, create a Japanese translation in `config/locales/ja.yml`
 
 ```yaml
 ja:
-  active_flag:
+  active_app:
     profile:
       languages:
         english: 英語
@@ -137,4 +141,4 @@ There are plenty of gems that share the same goal. However they have messy synta
 - [bitfields](https://github.com/grosser/bitfields)
 - [flag_shih_tzu](https://github.com/pboling/flag_shih_tzu)
 
-Also, `ActiveFlag` has one of the simplest code base that you can easily reason about or hack on.
+Also, `ActiveApp` has one of the simplest code base that you can easily reason about or hack on.

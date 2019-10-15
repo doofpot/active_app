@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'active_flag/version'
+require 'active_app/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'active_flag'
-  spec.version       = ActiveFlag::VERSION
+  spec.name          = 'active_app'
+  spec.version       = ActiveApp::VERSION
   spec.authors       = ['Kenn Ejima']
   spec.email         = ['kenn.ejima@gmail.com']
 
   spec.summary       = %q{Bit array for ActiveRecord}
   spec.description   = %q{Bit array for ActiveRecord}
-  spec.homepage      = 'https://github.com/kenn/active_flag'
+  spec.homepage      = 'https://github.com/kenn/active_app'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})

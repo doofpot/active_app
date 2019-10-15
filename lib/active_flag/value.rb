@@ -1,4 +1,4 @@
-module ActiveFlag
+module ActiveApp
   class Value < Set
     def with(instance, definition)
       @instance = instance

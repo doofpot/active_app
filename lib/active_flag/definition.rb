@@ -1,4 +1,4 @@
-module ActiveFlag
+module ActiveApp
   class Definition
     attr_reader :keys, :maps, :column
 
@@ -52,10 +52,10 @@ module ActiveFlag
       return if key.nil? # otherwise, key.to_s.humanize will return ""
       # Mimics ActiveModel::Translation.human_attribute_name
       defaults = @klass.lookup_ancestors.map do |klass|
-        :"#{@klass.i18n_scope}.active_flag.#{klass.model_name.i18n_key}.#{@column}.#{key}"
+        :"#{@klass.i18n_scope}.active_app.#{klass.model_name.i18n_key}.#{@column}.#{key}"
       end
-      defaults << :"active_flag.#{@klass.model_name.i18n_key}.#{@column}.#{key}"
-      defaults << :"active_flag.#{@column}.#{key}"
+      defaults << :"active_app.#{@klass.model_name.i18n_key}.#{@column}.#{key}"
+      defaults << :"active_app.#{@column}.#{key}"
       defaults << options.delete(:default) if options[:default]
       defaults << key.to_s.humanize
       I18n.translate defaults.shift, options.reverse_merge(count: 1, default: defaults)

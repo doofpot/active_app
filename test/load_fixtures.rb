@@ -1,6 +1,6 @@
 I18n.load_path << File.join(File.dirname(__FILE__), 'files/locales.yml')
 
-ActiveRecord::Base.send(:include, ActiveFlag)
+ActiveRecord::Base.send(:include, ActiveApp)
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
 
