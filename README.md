@@ -5,33 +5,33 @@ The original source is from active_flag
 
 ```ruby
 class Profile < ActiveRecord::Base
-  flag :applications, [:internal, :external_app_1, :external_2 ]
+  flag :application, [:internal, :external_app_1, :external_2 ]
 end
 
 # {:english=>1, :spanish=>2, :chinese=>4, :french=>8, :japanese=>16 }
 
 # Instance methods
-profile.applications                           #=> #<ActiveApp::Value: {:english, :japanese}>
-profile.applications.english?                  #=> true
-profile.applications.set?(:internal)            #=> true
-profile.applications.unset?(:internal)          #=> false
+profile.application                           #=> #<ActiveApp::Value: {:english, :japanese}>
+profile.application.english?                  #=> true
+profile.application.set?(:internal)            #=> true
+profile.application.unset?(:internal)          #=> false
 
-profile.applications.set(:external_app_1)
-profile.applications.unset(:external_app_2)
-profile.applications.raw                       #=> 3
-profile.applications.to_a                      #=> [:external_app_1, :external_app_2]
+profile.application.set(:external_app_1)
+profile.application.unset(:external_app_2)
+profile.application.raw                       #=> 3
+profile.application.to_a                      #=> [:external_app_1, :external_app_2]
 
-profile.applications = [:external_app_1, :external_app_2]   # Direct assignment that works with forms
+profile.application = [:external_app_1, :external_app_2]   # Direct assignment that works with forms
 
 # Class methods
-Profile.applications.maps                      #=> {:internal=>1, :external_app_1=>2, :external_2=>4 }
-Profile.applications.humans                    #=> {:internal=>"Vertaling 1", :external_app_1=>"Vertaling 2" ...}
-Profile.applications.pairs                     #=> {"English"=>:english, "Spanish"=>:spanish, "Chinese"=>:chinese, "French"=>:french, "Japanese"=>:japanese}
+Profile.application.maps                      #=> {:internal=>1, :external_app_1=>2, :external_2=>4 }
+Profile.application.humans                    #=> {:internal=>"Vertaling 1", :external_app_1=>"Vertaling 2" ...}
+Profile.application.pairs                     #=> {"English"=>:english, "Spanish"=>:spanish, "Chinese"=>:chinese, "French"=>:french, "Japanese"=>:japanese}
 
 # Scope methods
-Profile.where_applications(:external_app_1, :external_2)  #=> SELECT * FROM profiles WHERE languages & 10 > 0
-Profile.applications.set_all!(:external_2)        #=> UPDATE "profiles" SET languages = COALESCE(languages, 0) | 4
-Profile.applications.unset_all!(:external_2)      #=> UPDATE "profiles" SET languages = COALESCE(languages, 0) & ~4
+Profile.where_application(:external_app_1, :external_2)  #=> SELECT * FROM profiles WHERE languages & 10 > 0
+Profile.application.set_all!(:external_2)        #=> UPDATE "profiles" SET languages = COALESCE(languages, 0) | 4
+Profile.application.unset_all!(:external_2)      #=> UPDATE "profiles" SET languages = COALESCE(languages, 0) & ~4
 ```
 
 

@@ -9,15 +9,15 @@ ActiveRecord::Base.connection.create_table :profiles, force: true do |t|
 end
 
 class Profile < ActiveRecord::Base
-  flag :languages, [:english, :spanish, :chinese, :french, :japanese]
-  flag :others, [:thing]
+  application :languages, [:english, :spanish, :chinese, :french, :japanese]
+  application :others, [:thing]
 end
 
 class SubProfile < Profile
 end
 
 class Other < ActiveRecord::Base
-  flag :others, [:another]
+  application :others, [:another]
 end
 
 Profile.create(languages: [:english])

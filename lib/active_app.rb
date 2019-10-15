@@ -8,7 +8,7 @@ module ActiveApp
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def flag(column, keys)
+    def application(column, keys)
       unless respond_to?(:active_apps)
         class_attribute :active_apps
         self.active_apps = {}

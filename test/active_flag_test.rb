@@ -69,14 +69,14 @@ class ActiveAppTest < Minitest::Test
     refute Profile.first.languages.chinese?
   end
 
-  def test_multiple_flags
+  def test_multiple_applications
     assert Profile.languages
     assert Profile.others
   end
 
   def test_subclass
     assert_equal SubProfile.languages.keys, Profile.languages.keys
-    assert_raises { SubProfile.flag :languages, [:english] }
+    assert_raises { SubProfile.application :languages, [:english] }
   end
 
   def test_same_column_in_other_class
