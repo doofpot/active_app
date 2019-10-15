@@ -1,16 +1,49 @@
 # ActiveApp - Bit array for ActiveRecord
 
 
-Deze code is overgenomen van  active_flag.
+The original source is from active_flag
 
+```ruby
+class Profile < ActiveRecord::Base
+  flag :applications, [:internal, :external_app_1, :external_2 ]
+end
+
+# {:english=>1, :spanish=>2, :chinese=>4, :french=>8, :japanese=>16 }
+
+# Instance methods
+profile.applications                           #=> #<ActiveApp::Value: {:english, :japanese}>
+profile.applications.english?                  #=> true
+profile.applications.set?(:internal)            #=> true
+profile.applications.unset?(:internal)          #=> false
+
+profile.applications.set(:external_app_1)
+profile.applications.unset(:external_app_2)
+profile.applications.raw                       #=> 3
+profile.applications.to_a                      #=> [:external_app_1, :external_app_2]
+
+profile.applications = [:external_app_1, :external_app_2]   # Direct assignment that works with forms
+
+# Class methods
+Profile.applications.maps                      #=> {:internal=>1, :external_app_1=>2, :external_2=>4 }
+Profile.applications.humans                    #=> {:internal=>"Vertaling 1", :external_app_1=>"Vertaling 2" ...}
+Profile.applications.pairs                     #=> {"English"=>:english, "Spanish"=>:spanish, "Chinese"=>:chinese, "French"=>:french, "Japanese"=>:japanese}
+
+# Scope methods
+Profile.where_applications(:external_app_1, :external_2)  #=> SELECT * FROM profiles WHERE languages & 10 > 0
+Profile.applications.set_all!(:external_2)        #=> UPDATE "profiles" SET languages = COALESCE(languages, 0) | 4
+Profile.applications.unset_all!(:external_2)      #=> UPDATE "profiles" SET languages = COALESCE(languages, 0) & ~4
+```
+
+
+```
 
 [![Build Status](https://travis-ci.org/kenn/active_app.svg)](https://travis-ci.org/kenn/active_app)
 
-Store up to 64 multiple flags ([bit array](https://en.wikipedia.org/wiki/Bit_array)) in a single integer column with ActiveRecord. From a UI standpoint, it can be used as a  multi-select checkbox storage.
+Store up to 64 multiple applications ([bit array](https://en.wikipedia.org/wiki/Bit_array)) in a single integer column with ActiveRecord. From a UI standpoint, it can be used as a  multi-select checkbox storage.
 
 Perfect solution to store multiple boolean values such as preferences, notification settings, achievement status, profile options, etc. in a single column.
 
-* **Single column to group multiple boolean values.** You don't need to have many separate columns. You don't even need a migration when you add a new flag item to the list.
+* **Single column to group multiple boolean values.** You don't need to have many separate columns. You don't even need a migration when you add a new application item to the list.
 * **Fast bitwise operations.** `WHERE languages & 3 > 0` is faster than `WHERE (english = true) OR (spanish = true) OR ...`
 
 If you want a simple enum column, take a look at [EnumAccessor](https://github.com/kenn/enum_accessor).
@@ -66,7 +99,7 @@ t.integer :languages,                    null: false, default: 0, limit: 8
 add_column :users, :languages, :integer, null: false, default: 0, limit: 8
 ```
 
-`limit: 8` is only required if you need more than 32 flags.
+`limit: 8` is only required if you need more than 32 applications.
 
 ## Query
 
@@ -139,6 +172,6 @@ Thanks to the translation support, forms just work as you would expect with the 
 There are plenty of gems that share the same goal. However they have messy syntax than necessary in my opinion, and I wanted a better API to achieve that goal.
 
 - [bitfields](https://github.com/grosser/bitfields)
-- [flag_shih_tzu](https://github.com/pboling/flag_shih_tzu)
+- [application_shih_tzu](https://github.com/pboling/application_shih_tzu)
 
 Also, `ActiveApp` has one of the simplest code base that you can easily reason about or hack on.
